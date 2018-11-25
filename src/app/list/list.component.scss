@@ -1,0 +1,17 @@
+.patient-card{
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3), 0 5px 5px rgba(0, 0, 0, 0.22);
+    margin: 5px;
+}
+
+.patient-name{
+    font-size: 1.5rem;
+}
+.patient-location{
+    display: flex;
+    justify-content: space-between;
+}
+
+.patient-gender{
+    &.male{color: red}
+    &.female{color: green}
+}

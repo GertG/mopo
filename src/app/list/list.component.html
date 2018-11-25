@@ -1,0 +1,23 @@
+<mat-card class="patient-card" *ngFor="let patient of patients">
+    <mat-card-content>
+      <div class="patient-location">
+        <span>{{patient.service}}</span>
+        <span>{{patient.room}}</span>
+        <span>{{patient.bed}}</span>
+      </div>
+      <div>
+          <i *ngIf="patient.sex==0" class="fa fa-mars patient-gender male"></i>
+          <i *ngIf="patient.sex==1" class="fa fa-venus patient-gender female"></i>
+          &nbsp;
+      <!-- <div [ngSwitch]="patient.sex">
+          <i *ngSwitchCase="Gender.Male" class="fa fa-mars patient-gender male"></i>
+          <i *ngSwitchCase="Gender.Female" class="fa fa-venus patient-gender female"></i>   -->
+        <span class="patient-name">{{patient.name}}</span>
+        &nbsp;
+        <span class="patient-age">{{patient.age}}j</span>
+      </div>
+      <div>
+        {{patient.doctorName}}
+      </div>
+    </mat-card-content>
+  </mat-card>
