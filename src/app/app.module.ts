@@ -9,11 +9,14 @@ import { MatToolbarModule } from  '@angular/material/toolbar';
 import { MatCardModule } from  '@angular/material/card';
 import { MatButtonModule } from  '@angular/material/button';
 import { ListComponent } from './list/list.component';
+import { DetailComponent } from './detail/detail.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ListComponent
+    ListComponent,
+    DetailComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +25,8 @@ import { ListComponent } from './list/list.component';
     HttpClientModule,
     MatToolbarModule,
     MatCardModule,
-    MatButtonModule
+    MatButtonModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

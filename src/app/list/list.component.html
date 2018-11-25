@@ -1,4 +1,5 @@
-<mat-card class="patient-card" *ngFor="let patient of patients">
+<div fxLayout="column">
+  <mat-card fxFlex="33" class="patient-card" *ngFor="let patient of patients" (click)="navigate(patient)">
     <mat-card-content>
       <div class="patient-location">
         <span>{{patient.service}}</span>
@@ -6,12 +7,9 @@
         <span>{{patient.bed}}</span>
       </div>
       <div>
-          <i *ngIf="patient.sex==0" class="fa fa-mars patient-gender male"></i>
-          <i *ngIf="patient.sex==1" class="fa fa-venus patient-gender female"></i>
+          <i *ngIf="patient.sex==Gender.Male" class="fa fa-mars patient-gender male"></i>
+          <i *ngIf="patient.sex==Gender.Female" class="fa fa-venus patient-gender female"></i>
           &nbsp;
-      <!-- <div [ngSwitch]="patient.sex">
-          <i *ngSwitchCase="Gender.Male" class="fa fa-mars patient-gender male"></i>
-          <i *ngSwitchCase="Gender.Female" class="fa fa-venus patient-gender female"></i>   -->
         <span class="patient-name">{{patient.name}}</span>
         &nbsp;
         <span class="patient-age">{{patient.age}}j</span>
@@ -21,3 +19,4 @@
       </div>
     </mat-card-content>
   </mat-card>
+</div>

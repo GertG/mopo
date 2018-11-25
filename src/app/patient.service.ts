@@ -8,7 +8,7 @@ import { Patient, Gender } from './model/patient';
 const numberOfPatients: number = 200;
 const firstNamesMale: string[] = ['Bertus','Gerrit','Nicolaas','Hugo','Tom','Leo','Gert','Kris','Lucas','Matthias','Matteo'];
 const firstNamesFemale: string[] = ['Annie','Virginie','Maria','Patricia','Ann','Kristien','Wendy','Isabelle','Anja','Mia','Suzanne'];
-const lastNames: string[] = ['Peetermans','Peeters','Janssens','Beets','Loveling','Clause','Dewolf','Thijs','Lampo','Pauwels','Mortier','Nolens','Brouwers','Maes','Roggeman','Raes','Geerts','Brems','Timmermans','Streuvels','Rubens','Verhelst','Verhulst','Verhaegen','Zielens'];
+const lastNames: string[] = ['Peetermans','Peeters','Janssens','Beets','Loveling','Claus','Dewolf','Thijs','Lampo','Pauwels','Mortier','Nolens','Brouwers','Maes','Roggeman','Raes','Geerts','Brems','Timmermans','Streuvels','Rubens','Verhelst','Verhulst','Verhaegen','Zielens'];
 const careServices: string[] = ['VP01','VP02','VP03','A510','A515','A520','A525','A610','A615','A620','A625'];
 const beds: string[] = ['B1', 'B2'];
 
@@ -25,6 +25,7 @@ export class PatientService {
      for(let xx=0; xx < numberOfPatients; xx++){
       let patient = new Patient();
       
+      patient.id = xx + 1;
       patient.sex = this.pickOne([Gender.Male, Gender.Female]);
       patient.name = this.pickName(patient.sex);
       patient.doctorName = this.pickOne(["Prof. Dr. ", "Dr. "]) + this.pickName(patient.sex);
