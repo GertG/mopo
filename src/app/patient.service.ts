@@ -27,7 +27,7 @@ export class PatientService {
       
       patient.sex = this.pickOne([Gender.Male, Gender.Female]);
       patient.name = this.pickName(patient.sex);
-      patient.doctorName = "Prof. Dr. " + this.pickName(patient.sex);
+      patient.doctorName = this.pickOne(["Prof. Dr. ", "Dr. "]) + this.pickName(patient.sex);
       patient.age = this.randomInt(14, 99);
       patient.service = this.pickOne(careServices);
       patient.bed = this.pickOne(beds);
