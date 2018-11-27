@@ -22,7 +22,6 @@ export class ListComponent implements OnInit {
 
   fetchData(){
     this.patientService.fetch().subscribe((data:  Patient[])=>{
-      console.log(data);
       this.patients  =  data;
     }, (err)=>{
       console.log(err);

@@ -16,30 +16,43 @@ const beds: string[] = ['B1', 'B2'];
   providedIn: 'root'
 })
 export class PatientService {
-  constructor(private http: HttpClient) {
 
-   }
+  patients: Patient[];
+
+  constructor(private http: HttpClient) {
+      this.patients = this.generatePatients();
+  }
 
   fetch(): Observable<Patient[]>{
-     let patients : Patient[] = [];
-     for(let xx=0; xx < numberOfPatients; xx++){
-      let patient = new Patient();
-      
-      patient.id = xx + 1;
-      patient.sex = this.pickOne([Gender.Male, Gender.Female]);
-      patient.name = this.pickName(patient.sex);
-      patient.doctorName = this.pickOne(["Prof. Dr. ", "Dr. "]) + this.pickName(patient.sex);
-      patient.age = this.randomInt(14, 99);
-      patient.service = this.pickOne(careServices);
-      patient.bed = this.pickOne(beds);
-      patient.room = "K" + this.randomInt(1, 99);
-      patients.push(patient);
-     }
-
     return new Observable((observer) => {
-      observer.next(patients);
+      observer.next(this.patients);
       observer.complete();
     });
+   }
+
+   findById(id: number): Observable<Patient>{
+    return new Observable((observer) => {
+      observer.next(this.patients.find(p => p.id == id));
+      observer.complete();
+    });
+   } 
+
+   private generatePatients(): Patient[]{
+    let patients : Patient[] = [];
+    for(let xx=0; xx < numberOfPatients; xx++){
+     let patient = new Patient();
+     
+     patient.id = xx + 1;
+     patient.sex = this.pickOne([Gender.Male, Gender.Female]);
+     patient.name = this.pickName(patient.sex);
+     patient.doctorName = this.pickOne(["Prof. Dr. ", "Dr. "]) + this.pickName(patient.sex);
+     patient.age = this.randomInt(14, 99);
+     patient.service = this.pickOne(careServices);
+     patient.bed = this.pickOne(beds);
+     patient.room = "K" + this.randomInt(1, 99);
+     patients.push(patient);
+    }
+    return patients;
    }
 
    private pickName(gender: Gender){

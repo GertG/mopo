@@ -1,3 +1,41 @@
-<p>
-  detail works!
-</p>
+<mat-tab-group mat-stretch-tabs>
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <i class="fa fa-list-ul"></i>
+      <span fxShow.lt-sm="false">&nbsp;&nbsp;Info</span>
+    </ng-template>
+    <!-- Content of first tab -->
+    <div class="form-container mat-typography">
+      <h1>{{patient.name}}</h1>
+      <mat-form-field>
+        <input matInput placeholder="Dienst" value="{{patient.service}}">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Kamer" value="{{patient.room}}">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Bed" value="{{patient.bed}}">
+      </mat-form-field>
+      <h3>{{patient.doctorName}}</h3>
+    </div>
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <i class="fa fa-camera-retro"></i>
+      <span fxShow.lt-sm="false">&nbsp;&nbsp;Foto</span>
+    </ng-template>
+    <!-- Content of second tab -->
+    Content 2
+  </mat-tab>
+
+  <mat-tab>
+    <ng-template mat-tab-label>
+
+      <i class="fa fa-map-marker-alt"></i>
+      <span fxShow.lt-sm="false">&nbsp;&nbsp;Locatie</span>
+    </ng-template>
+    <!-- Content of third tab -->
+    Content 3
+  </mat-tab>
+</mat-tab-group>
