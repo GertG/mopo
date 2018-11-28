@@ -1,6 +1,12 @@
 .patient-card{
     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.3), 0 5px 5px rgba(0, 0, 0, 0.22);
     margin: 5px;
+    cursor: pointer;
+
+    .patient-card-name-row{
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
 }
 
 .patient-name{

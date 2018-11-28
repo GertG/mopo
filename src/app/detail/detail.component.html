@@ -1,41 +1,67 @@
-<mat-tab-group mat-stretch-tabs>
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <i class="fa fa-list-ul"></i>
-      <span fxShow.lt-sm="false">&nbsp;&nbsp;Info</span>
-    </ng-template>
-    <!-- Content of first tab -->
-    <div class="form-container mat-typography">
-      <h1>{{patient.name}}</h1>
-      <mat-form-field>
-        <input matInput placeholder="Dienst" value="{{patient.service}}">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Kamer" value="{{patient.room}}">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Bed" value="{{patient.bed}}">
-      </mat-form-field>
-      <h3>{{patient.doctorName}}</h3>
-    </div>
-  </mat-tab>
+<mat-toolbar  color="primary">
+  <mat-toolbar-row>
+    <i class="fa fa-long-arrow-alt-left clickable" (click)="router.navigate(['/'])"></i>
+    <span class="fill-space"></span>
+    <span>{{patient.service}}&nbsp;&nbsp;{{patient.room}}&nbsp;&nbsp;{{patient.bed}}</span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<main>
+  <mat-tab-group mat-stretch-tabs>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <i class="fa fa-list-ul"></i>
+        <span fxShow.lt-sm="false">&nbsp;&nbsp;Info</span>
+      </ng-template>
+      <!-- Content of first tab -->
+      <div class="form-container">
+        <h1>{{patient.name}}</h1>
+        <mat-form-field>
+          <input matInput placeholder="Dienst" value="{{patient.service}}">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Kamer" value="{{patient.room}}">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Bed" value="{{patient.bed}}">
+        </mat-form-field>
+        <h3>{{patient.doctorName}}</h3>
+      </div>
+    </mat-tab>
 
-  <mat-tab>
-    <ng-template mat-tab-label>
-      <i class="fa fa-camera-retro"></i>
-      <span fxShow.lt-sm="false">&nbsp;&nbsp;Foto</span>
-    </ng-template>
-    <!-- Content of second tab -->
-    Content 2
-  </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <i class="fa fa-camera-retro"></i>
+        <span fxShow.lt-sm="false">&nbsp;&nbsp;Foto</span>
+      </ng-template>
+      <!-- Content of second tab -->
+      <div class="form-container">
+        <img fxFlexAlign="center" class="patient-image" src="{{patient.pictureUrl}}">
+        <input type="file" 
+                class="hidden"
+                (change)="onPictureSelected($event)"
+                #fileInput>
+        <button (click)="fileInput.click()" mat-raised-button>Foto selecteren</button>
+        <button mat-raised-button>Foto nemen</button>
+      </div>
+    </mat-tab>
 
-  <mat-tab>
-    <ng-template mat-tab-label>
+    <mat-tab>
+      <ng-template mat-tab-label>
 
-      <i class="fa fa-map-marker-alt"></i>
-      <span fxShow.lt-sm="false">&nbsp;&nbsp;Locatie</span>
-    </ng-template>
-    <!-- Content of third tab -->
-    Content 3
-  </mat-tab>
-</mat-tab-group>
+        <i class="fa fa-map-marker-alt"></i>
+        <span fxShow.lt-sm="false">&nbsp;&nbsp;Locatie</span>
+      </ng-template>
+      <!-- Content of third tab -->
+      <div class="form-container">
+      <h2>{{patient.address}}</h2>
+      <agm-map class="address-map"
+      (mapReady)="mapReadyHandler()"
+        [latitude]="lat"
+        [longitude]="lng"
+        [zoom]="13">
+          <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+      </agm-map>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</main>

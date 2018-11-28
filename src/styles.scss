@@ -6,3 +6,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-tab-label .fa{
     font-size: 1.3rem;
 }
+.fill-space {
+    /* This fills the remaining space, when using flexbox. */
+    flex: 1 1 auto;
+}
+
+.center-children{
+   justify-content: center; 
+}
+
+.justify-children{
+    justify-content: space-between; 
+ }
+
+ .clickable{
+     cursor: pointer;
+ }
+
+ .hidden{
+     display: none;
+ }

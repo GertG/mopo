@@ -1,22 +1,31 @@
-<div fxLayout="column">
-  <mat-card fxFlex="33" class="patient-card" *ngFor="let patient of patients" (click)="navigate(patient)">
-    <mat-card-content>
-      <div class="patient-location">
-        <span>{{patient.service}}</span>
-        <span>{{patient.room}}</span>
-        <span>{{patient.bed}}</span>
-      </div>
-      <div>
-          <i *ngIf="patient.sex==Gender.Male" class="fa fa-mars patient-gender male"></i>
-          <i *ngIf="patient.sex==Gender.Female" class="fa fa-venus patient-gender female"></i>
+<mat-toolbar  color="primary">
+  <mat-toolbar-row class="justify-children">
+    <i class="fa fa-search clickable"></i>
+    <span>Patiënten</span>
+    <i class="fa fa-plus clickable"></i>
+  </mat-toolbar-row>
+</mat-toolbar>
+<main>
+  <div fxLayout="column">
+    <mat-card fxFlex="33" class="patient-card" *ngFor="let patient of patients" (click)="navigate(patient)">
+      <mat-card-content>
+        <div class="patient-location">
+          <span class="mat-caption">{{patient.service}}</span>
+          <span class="mat-caption">{{patient.room}}</span>
+          <span class="mat-caption">{{patient.bed}}</span>
+        </div>
+        <div class="patient-card-name-row">
+            <i *ngIf="patient.sex==Gender.Male" class="fa fa-mars patient-gender male"></i>
+            <i *ngIf="patient.sex==Gender.Female" class="fa fa-venus patient-gender female"></i>
+            &nbsp;
+          <span class="patient-name">{{patient.name}}</span>
           &nbsp;
-        <span class="patient-name">{{patient.name}}</span>
-        &nbsp;
-        <span class="patient-age">{{patient.age}}j</span>
-      </div>
-      <div>
-        {{patient.doctorName}}
-      </div>
-    </mat-card-content>
-  </mat-card>
-</div>
+          <span class="patient-age">{{patient.age}}j</span>
+        </div>
+        <div class="mat-caption">
+          {{patient.doctorName}}
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</main>

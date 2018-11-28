@@ -4,6 +4,17 @@
     padding: 10px;
   }
   
-  .form-container > * {
-    width: 100%;
-  }
+.form-container > * {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.patient-image{
+  width: 100%;
+  max-width: 500px;
+  max-height: 400px;
+}
+
+.address-map {
+  height: 300px;
+}

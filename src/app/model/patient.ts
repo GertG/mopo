@@ -9,4 +9,6 @@ export class Patient {
   bed: string;
   age: number;
   sex: Gender;
+  pictureUrl: string;
+  address: string;
 }
