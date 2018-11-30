@@ -1,12 +1,12 @@
 <mat-toolbar  color="primary">
   <mat-toolbar-row class="justify-children">
-    <i class="fa fa-search clickable"></i>
+    <i class="fa fa-search clickable" (click)="openFilterDialog()"></i>
     <span>Patiënten</span>
     <i class="fa fa-plus clickable"></i>
   </mat-toolbar-row>
 </mat-toolbar>
 <main>
-  <div fxLayout="column">
+  <div fxLayout="column" (scroll)="onScroll($event)">
     <mat-card fxFlex="33" class="patient-card" *ngFor="let patient of patients" (click)="navigate(patient)">
       <mat-card-content>
         <div class="patient-location">

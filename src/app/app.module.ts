@@ -12,19 +12,23 @@ import { MatTabsModule}  from  '@angular/material/tabs';
 import { MatIconModule} from '@angular/material/icon';
 import { MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { ListComponent } from './list/list.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { ListComponent, PatientFilterDialog } from './list/list.component';
 import { DetailComponent } from './detail/detail.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { AgmCoreModule } from '@agm/core';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListComponent,
-    DetailComponent
+    DetailComponent,
+    PatientFilterDialog
   ],
+  entryComponents: [PatientFilterDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,13 +42,16 @@ import { AgmCoreModule } from '@agm/core';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatDialogModule,
     AgmCoreModule.forRoot({
       apiKey: ''
     })
   ],
   exports:[MatButtonModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

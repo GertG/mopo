@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PatientService } from '../patient.service';
 import { MapService } from '../map.service';
 import { MatButtonModule } from '@angular/material/button';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-detail',
@@ -16,6 +17,10 @@ export class DetailComponent implements OnInit, OnDestroy {
   sub: any;
   lat: number = 50.9;
   lng: number = 4.4;
+  hasChanges: boolean = false;
+  serviceControl = new FormControl();
+  roomControl = new FormControl();
+  bedControl = new FormControl();
 
   constructor(private  patientService:  PatientService, 
               private mapService: MapService,
@@ -27,6 +32,9 @@ export class DetailComponent implements OnInit, OnDestroy {
       let id = +params['id']; // (+) converts string 'id' to a number
       this.patientService.findById(id).subscribe(p => {
         this.patient = p;
+        this.serviceControl.setValue(this.patient.service);
+        this.roomControl.setValue(this.patient.room);
+        this.bedControl.setValue(this.patient.bed);
       })
    });
 
@@ -35,6 +43,22 @@ export class DetailComponent implements OnInit, OnDestroy {
   onPictureSelected(event){
     console.log("picture selected");
     console.log(event);
+  }
+
+  detectChanges(event){
+    this.hasChanges = !(this.patient.service == this.serviceControl.value
+                        && this.patient.room == this.roomControl.value
+                        && this.patient.bed == this.bedControl.value);
+  }
+
+  saveChanges(event){
+    this.patient.service = this.serviceControl.value;
+    this.patient.room = this.roomControl.value;
+    this.patient.bed = this.bedControl.value;
+
+    //TODO: save changes to back-end
+
+    this.hasChanges = false;
   }
 
   ngOnDestroy(){

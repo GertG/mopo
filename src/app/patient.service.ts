@@ -4,9 +4,10 @@ import { Observable } from 'rxjs';
 import { from } from 'rxjs';
 
 import { Patient, Gender } from './model/patient';
+import { PatientFilter } from './model/patientFilter';
 
 const numberOfPatients: number = 200;
-const firstNamesMale: string[] = ['Bertus','Gerrit','Nicolaas','Hugo','Tom','Leo','Gert','Kris','Lucas','Matthias','Matteo'];
+const firstNamesMale: string[] = ['Bertus','Gerrit','Nicolaas','Hugo','Tom','Leo','Geert','Kris','Lucas','Matthias','Matteo'];
 const firstNamesFemale: string[] = ['Annie','Virginie','Maria','Patricia','Ann','Kristien','Wendy','Isabelle','Anja','Mia','Suzanne'];
 const lastNames: string[] = ['Peetermans','Peeters','Janssens','Beets','Loveling','Claus','Dewolf','Thijs','Lampo','Pauwels','Mortier','Nolens','Brouwers','Maes','Roggeman','Raes','Geerts','Brems','Timmermans','Streuvels','Rubens','Verhelst','Verhulst','Verhaegen','Zielens'];
 const careServices: string[] = ['VP01','VP02','VP03','A510','A515','A520','A525','A610','A615','A620','A625'];
@@ -18,22 +19,43 @@ const pictureUrls: string[] = ["https://28.media.tumblr.com/tumblr_krvvxawUd81qa
 })
 export class PatientService {
 
-  patients: Patient[];
+  allPatients: Patient[];
 
   constructor(private http: HttpClient) {
-      this.patients = this.generatePatients();
+      this.allPatients = this.generatePatients();
   }
 
-  fetch(): Observable<Patient[]>{
+  fetch(filter?: PatientFilter): Observable<Patient[]>{
+
+    let patients : Patient[] = [];
+
+    if(!filter){
+      patients = this.allPatients;
+    } else {
+      this.allPatients.forEach(patient => {
+        if(this.isMatch(patient, filter)){
+          patients.push(patient);
+        }
+      });
+    }
+
     return new Observable((observer) => {
-      observer.next(this.patients);
+      observer.next(patients);
       observer.complete();
     });
    }
 
+   isMatch(patient: Patient, filter: PatientFilter){
+     if(filter.name && !patient.name.includes(filter.name)) return false;
+     if(filter.doctorName && !patient.doctorName.includes(filter.doctorName)) return false;
+     if(filter.service && filter.service != patient.service) return false;
+
+     return true;
+   }
+
    findById(id: number): Observable<Patient>{
     return new Observable((observer) => {
-      observer.next(this.patients.find(p => p.id == id));
+      observer.next(this.allPatients.find(p => p.id == id));
       observer.complete();
     });
    } 
@@ -52,7 +74,7 @@ export class PatientService {
      patient.bed = this.pickOne(beds);
      patient.room = "K" + this.randomInt(1, 99);
      patient.pictureUrl = this.pickOne(pictureUrls);
-     patient.address = "Havermarkt 1, Hasselt";
+     patient.address = this.pickOne(["Havermarkt 1, Hasselt","Wetstraat 6, 1000 Brussel", "Meir 7, Antwerpen", "Bondgenotenlaan 100, Leuven"]);
      patients.push(patient);
     }
     return patients;

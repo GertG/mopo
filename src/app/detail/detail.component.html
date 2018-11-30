@@ -16,15 +16,26 @@
       <div class="form-container">
         <h1>{{patient.name}}</h1>
         <mat-form-field>
-          <input matInput placeholder="Dienst" value="{{patient.service}}">
+          <input matInput placeholder="Dienst" value="{{patient.service}}"
+          [formControl]="serviceControl"
+          (keyup)="detectChanges($event)">
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Kamer" value="{{patient.room}}">
+          <input matInput placeholder="Kamer" value="{{patient.room}}"
+          [formControl]="roomControl"
+          (keyup)="detectChanges($event)">
+          
         </mat-form-field>
         <mat-form-field>
-          <input matInput placeholder="Bed" value="{{patient.bed}}">
+          <input matInput placeholder="Bed" value="{{patient.bed}}"
+          [formControl]="bedControl"
+          (keyup)="detectChanges($event)">
         </mat-form-field>
         <h3>{{patient.doctorName}}</h3>
+        <div *ngIf="hasChanges" fxLayoutAlign="end center">
+          <span class="alert">Gewijzigde gegevens!&nbsp;&nbsp;</span>
+          <button (click)="saveChanges($event)" mat-raised-button color="primary">Opslaan</button>
+        </div>
       </div>
     </mat-tab>
 

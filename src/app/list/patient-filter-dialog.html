@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Zoekcriteria</h1>
+<div mat-dialog-content>
+    <mat-form-field>
+        <input matInput placeholder="Dienst" [(ngModel)]="data.filter.service">
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button (click)="onCancel()">Annuleren</button>
+    <button mat-button [mat-dialog-close]="data.filter" cdkFocusInitial>Toepassen</button>
+</div>
