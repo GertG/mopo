@@ -1,8 +1,11 @@
 <h1 mat-dialog-title>Zoekcriteria</h1>
 <div mat-dialog-content>
     <mat-form-field>
-        <input matInput placeholder="Dienst" [(ngModel)]="data.filter.service">
+        <input matInput placeholder="Patient name" [(ngModel)]="data.filter.name">
     </mat-form-field>
+    <mat-form-field>
+            <input matInput placeholder="Doctor name" [(ngModel)]="data.filter.doctorName">
+        </mat-form-field>
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onCancel()">Annuleren</button>

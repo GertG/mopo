@@ -31,13 +31,14 @@ export class ListComponent implements OnInit {
   openFilterDialog(): void {
     const dialogRef = this.dialog.open(PatientFilterDialog, {
 
-      width: '250px',
+      width: '300px',
       data: {filter: this.patientFilter}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
       this.patientFilter = result;
+      this.fetchData();
     });
   }
 
