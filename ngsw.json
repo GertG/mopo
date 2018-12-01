@@ -12,7 +12,8 @@
         "https://gertg.github.com/mopo/main.e9434adc33bbda504d0c.js",
         "https://gertg.github.com/mopo/polyfills.b3373adee3acc576767d.js",
         "https://gertg.github.com/mopo/runtime.ec2944dd8b20ec099bf3.js",
-        "https://gertg.github.com/mopo/styles.5615744c43f7c938574b.css"
+        "https://gertg.github.com/mopo/styles.8f21f97405d75cccf5ac.css",
+        "https://gertg.github.com/mopo/styles.d485bc9b72005a8651ee.js"
       ],
       "patterns": []
     },
@@ -44,11 +45,12 @@
     "https://gertg.github.com/mopo/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "https://gertg.github.com/mopo/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
     "https://gertg.github.com/mopo/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "https://gertg.github.com/mopo/index.html": "0713346b5c05fae83ce788b8d6e3708dea0f261b",
+    "https://gertg.github.com/mopo/index.html": "7c6bddd280677d173d7ecdf6a796861632305085",
     "https://gertg.github.com/mopo/main.e9434adc33bbda504d0c.js": "b2e271d20af2a39da87a9a1f96ba229f6d0e3707",
     "https://gertg.github.com/mopo/polyfills.b3373adee3acc576767d.js": "2ffe2c47615be5d43b196690f89243d5b74f7559",
     "https://gertg.github.com/mopo/runtime.ec2944dd8b20ec099bf3.js": "b62956c2192bfe5516d6374e753773901ed50ec5",
-    "https://gertg.github.com/mopo/styles.5615744c43f7c938574b.css": "51e344236181da5396c4ab75a29476b3b1365539"
+    "https://gertg.github.com/mopo/styles.8f21f97405d75cccf5ac.css": "6fe6ab630ebd1818449df270295bb3b8f593acfd",
+    "https://gertg.github.com/mopo/styles.d485bc9b72005a8651ee.js": "f5a34a994abb01b61112c77115b06b8e870908dc"
   },
   "navigationUrls": [
     {
