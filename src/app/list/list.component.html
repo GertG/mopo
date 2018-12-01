@@ -6,7 +6,7 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <main>
-  <div fxLayout="column" (scroll)="onScroll($event)">
+  <div fxLayout="column">
     <mat-card fxFlex="33" class="patient-card" *ngFor="let patient of patients" (click)="navigate(patient)">
       <mat-card-content>
         <div class="patient-location">

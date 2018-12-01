@@ -25,6 +25,13 @@ export class PatientService {
       this.allPatients = this.generatePatients();
   }
 
+  fetchServices(): Observable<string[]>{
+    return new Observable((observer) => {
+      observer.next(careServices);
+      observer.complete();
+    });
+  }
+
   fetch(filter?: PatientFilter): Observable<Patient[]>{
 
     let patients : Patient[] = [];
@@ -46,9 +53,9 @@ export class PatientService {
    }
 
    isMatch(patient: Patient, filter: PatientFilter){
-     if(filter.name && !patient.name.includes(filter.name)) return false;
-     if(filter.doctorName && !patient.doctorName.includes(filter.doctorName)) return false;
-     if(filter.service && filter.service != patient.service) return false;
+     if(filter.name && !patient.name.toUpperCase().includes(filter.name.toUpperCase())) return false;
+     if(filter.doctorName && !patient.doctorName.toUpperCase().includes(filter.doctorName.toUpperCase())) return false;
+     if(filter.services && !filter.services.includes(patient.service)) return false;
 
      return true;
    }

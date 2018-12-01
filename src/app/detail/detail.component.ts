@@ -24,7 +24,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   constructor(private  patientService:  PatientService, 
               private mapService: MapService,
-              private router: Router, 
+              public router: Router, 
               private route: ActivatedRoute) { }
 
   ngOnInit() {

@@ -6,7 +6,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { PatientService } from '../patient.service';
 import { Patient, Gender } from '../model/patient';
 import { PatientFilter } from '../model/patientFilter';
-
+import { FormControl } from '@angular/forms';
 
 const PATIENTS_PER_PAGE : number = 20;
 const MAX_PATIENTS = 200;
@@ -30,9 +30,8 @@ export class ListComponent implements OnInit {
 
   openFilterDialog(): void {
     const dialogRef = this.dialog.open(PatientFilterDialog, {
-
       width: '300px',
-      data: {filter: this.patientFilter}
+      data: this.patientFilter
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -86,10 +85,19 @@ export class ListComponent implements OnInit {
   templateUrl: 'patient-filter-dialog.html',
 })
 export class PatientFilterDialog {
+
+  services: string[];
+
   constructor(
     public dialogRef: MatDialogRef<PatientFilterDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: PatientFilter){
-
+    @Inject(MAT_DIALOG_DATA) public data: PatientFilter,
+    patientService: PatientService){
+      patientService.fetchServices().subscribe((answer:  string[])=>{
+        this.services  =  answer;
+        console.log(this.services);
+      }, (err)=>{
+        console.log(err);
+      });
     }
 
     onCancel(): void {

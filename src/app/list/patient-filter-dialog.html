@@ -1,13 +1,24 @@
 <h1 mat-dialog-title>Zoekcriteria</h1>
 <div mat-dialog-content>
     <mat-form-field>
-        <input matInput placeholder="Patient name" [(ngModel)]="data.filter.name">
+        <input matInput placeholder="Patient name" 
+                [(ngModel)]="data.name" 
+                (keyup.enter)="dialogRef.close(data)"
+                cdkFocusInitial>
     </mat-form-field>
     <mat-form-field>
-            <input matInput placeholder="Doctor name" [(ngModel)]="data.filter.doctorName">
-        </mat-form-field>
+        <input matInput placeholder="Doctor name" 
+        [(ngModel)]="data.doctorName"
+        (keyup.enter)="dialogRef.close(data)">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="Diensten" [(ngModel)]="data.services" multiple>
+            <mat-option *ngFor="let service of services" [value]="service">{{service}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+          
 </div>
 <div mat-dialog-actions>
     <button mat-button (click)="onCancel()">Annuleren</button>
-    <button mat-button [mat-dialog-close]="data.filter" cdkFocusInitial>Toepassen</button>
+    <button mat-button color="primary" [mat-dialog-close]="data">Toepassen</button>
 </div>
