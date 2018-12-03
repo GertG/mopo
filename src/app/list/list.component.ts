@@ -10,6 +10,7 @@ import { FormControl } from '@angular/forms';
 
 const PATIENTS_PER_PAGE : number = 20;
 const MAX_PATIENTS = 200;
+const DRAG_PERCENTAGE_TO_DISCHARGE_PATIENT = 30;
 
 @Component({
   selector: 'app-list',
@@ -49,25 +50,35 @@ export class ListComponent implements OnInit {
   fetchData(){
     this.patientService.fetch(this.patientFilter).subscribe((data:  Patient[])=>{
       this.patients  =  data.slice(0, this.pages * PATIENTS_PER_PAGE);
-      this.resetPositions();
-      //console.log(this.cardPositions[1]);
+      this.resetPositions();      
     }, (err)=>{
       console.log(err);
     });
   }
 
   resetPositions(){
-    this.cardPositions = new Map<number, number>();
+    this.cardPositions = new Map<number, number>();    
     this.patients.forEach(p => {
       this.cardPositions[p.id] = 0;
       console.log(this.cardPositions[p.id]);
     });      
   }
 
-  navigate(patient: Patient){
+  cardClicked(patient: Patient){
+
+console.log("clicked " + patient.id);
+console.log("which is at position " + this.cardPositions[patient.id])
+
+    //don't allow navigation to patient while
+    //we're draging their card
     if(this.cardPositions[patient.id] == 0){
-      this.router.navigate(['/detail', patient.id]);
-    }    
+      console.log("navigating");
+      this.navigate(patient);
+    }
+  }
+
+  navigate(patient: Patient){
+    this.router.navigate(['/detail', patient.id]);
   }
 
 
@@ -95,22 +106,19 @@ export class ListComponent implements OnInit {
     this.cardPositions[patient.id] = event.deltaX;
   }
 
-  onCardRelease(event, patient){
+  onCardRelease(event, patient){    
 
     let offset: number = Math.abs(this.cardPositions[patient.id]);
     let w = window.innerWidth;
     let percentage = Math.round((offset/w)*100);
-    console.log('width: ' + w);
-    console.log('offset: ' + offset);
-    console.log(percentage);
-    if(percentage > 30){
-      console.log('discharging');
+
+    if(percentage > DRAG_PERCENTAGE_TO_DISCHARGE_PATIENT){
       this.dischargePatient(patient);
-    } else {
-      console.log('keeping');
     }
 
     this.cardPositions[patient.id] = 0;
+
+    event.preventDefault();
   }
 
   dischargePatient(patient: Patient){

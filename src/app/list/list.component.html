@@ -13,10 +13,10 @@
             <span><i class="fa fa-sign-out-alt"></i>&nbsp;&nbsp;Uitchecken</span>
         </div>
       <mat-card fxFlex="99" class="patient-card"                
-                (click)="navigate(patient)"
+                (click)="cardClicked(patient)"
                 (panright)="onCardPan($event, patient)"
                 (panend)="onCardRelease($event, patient)"
-                (mouseup)="onCardRelease($event, patient)"
+                data-mc-options='{ "touchAction": "pan-y" }'
                 [ngStyle]="{'left.px': cardPositions[patient.id]}"
                 >
         <mat-card-content>
