@@ -7,7 +7,10 @@
 </mat-toolbar>
 <main>
   <div fxLayout="column">
-    <mat-card fxFlex="33" class="patient-card" *ngFor="let patient of patients" (click)="navigate(patient)">
+    <mat-card fxFlex="33" class="patient-card"
+              *ngFor="let patient of patients" 
+              (click)="navigate(patient)"
+              (pan)="onCardPan($event)">
       <mat-card-content>
         <div class="patient-location">
           <span class="mat-caption">{{patient.service}}</span>

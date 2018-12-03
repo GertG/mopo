@@ -78,6 +78,14 @@ export class ListComponent implements OnInit {
     }
   }
 
+  onCardPan(event){ 
+    //console.log(event);
+    console.log(event.center.x + " - " + event.deltaX);
+    console.log(event.target);
+    console.log(event.target.style.marginLeft);
+    event.target.style.marginLeft = event.deltaX;
+  }
+
 }
 
 @Component({
