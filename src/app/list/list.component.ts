@@ -21,6 +21,7 @@ export class ListComponent implements OnInit {
   patients:  Array<Patient>;
   pages: number = 1;
   patientFilter = new PatientFilter();
+  cardPositions: Map<number, number>;
 
   constructor(public dialog: MatDialog,
               private  patientService:  PatientService, 
@@ -48,13 +49,25 @@ export class ListComponent implements OnInit {
   fetchData(){
     this.patientService.fetch(this.patientFilter).subscribe((data:  Patient[])=>{
       this.patients  =  data.slice(0, this.pages * PATIENTS_PER_PAGE);
+      this.resetPositions();
+      //console.log(this.cardPositions[1]);
     }, (err)=>{
       console.log(err);
     });
   }
 
+  resetPositions(){
+    this.cardPositions = new Map<number, number>();
+    this.patients.forEach(p => {
+      this.cardPositions[p.id] = 0;
+      console.log(this.cardPositions[p.id]);
+    });      
+  }
+
   navigate(patient: Patient){
-    this.router.navigate(['/detail', patient.id]);
+    if(this.cardPositions[patient.id] == 0){
+      this.router.navigate(['/detail', patient.id]);
+    }    
   }
 
 
@@ -78,12 +91,30 @@ export class ListComponent implements OnInit {
     }
   }
 
-  onCardPan(event){ 
-    //console.log(event);
-    console.log(event.center.x + " - " + event.deltaX);
-    console.log(event.target);
-    console.log(event.target.style.marginLeft);
-    event.target.style.marginLeft = event.deltaX;
+  onCardPan(event, patient){ 
+    this.cardPositions[patient.id] = event.deltaX;
+  }
+
+  onCardRelease(event, patient){
+
+    let offset: number = Math.abs(this.cardPositions[patient.id]);
+    let w = window.innerWidth;
+    let percentage = Math.round((offset/w)*100);
+    console.log('width: ' + w);
+    console.log('offset: ' + offset);
+    console.log(percentage);
+    if(percentage > 30){
+      console.log('discharging');
+      this.dischargePatient(patient);
+    } else {
+      console.log('keeping');
+    }
+
+    this.cardPositions[patient.id] = 0;
+  }
+
+  dischargePatient(patient: Patient){
+    this.patients = this.patients.filter(obj => obj.id !== patient.id);
   }
 
 }

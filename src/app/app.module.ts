@@ -22,6 +22,22 @@ import { environment } from '../environments/environment';
 import { AgmCoreModule } from '@agm/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+import {
+  HammerGestureConfig,
+  HAMMER_GESTURE_CONFIG,
+} from '@angular/platform-browser';
+
+declare var Hammer: any;
+
+export class MyHammerConfig extends HammerGestureConfig  {
+  buildHammer(element: HTMLElement) {
+    let mc = new Hammer(element, {
+      touchAction: "auto",
+    });
+    return mc;
+  }
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,11 +65,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     MatDialogModule,
     AgmCoreModule.forRoot({
-      apiKey: ''
+      apiKey: 'AIzaSyAHoMPDp5xpt3gAZHReqN8X3_6RKOsPBoA'
     })
   ],
   exports:[MatButtonModule],
-  providers: [],
   bootstrap: [AppComponent],
+  providers: [    {
+    // hammer instantion with custom config
+    provide: HAMMER_GESTURE_CONFIG,
+    useClass: MyHammerConfig ,
+  },]
 })
 export class AppModule { }
+

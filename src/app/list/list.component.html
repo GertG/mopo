@@ -6,29 +6,39 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <main>
-  <div fxLayout="column">
-    <mat-card fxFlex="33" class="patient-card"
-              *ngFor="let patient of patients" 
-              (click)="navigate(patient)"
-              (pan)="onCardPan($event)">
-      <mat-card-content>
-        <div class="patient-location">
-          <span class="mat-caption">{{patient.service}}</span>
-          <span class="mat-caption">{{patient.room}}</span>
-          <span class="mat-caption">{{patient.bed}}</span>
+  <div fxLayout="column" class="patient-list">
+    <div *ngFor="let patient of patients">
+        <div class="card-back-drop" fxLayoutAlign="space-between center">
+            <span><i class="fa fa-sign-out-alt"></i>&nbsp;&nbsp;Uitchecken</span>
+            <span><i class="fa fa-sign-out-alt"></i>&nbsp;&nbsp;Uitchecken</span>
         </div>
-        <div class="patient-card-name-row">
-            <i *ngIf="patient.sex==Gender.Male" class="fa fa-mars patient-gender male"></i>
-            <i *ngIf="patient.sex==Gender.Female" class="fa fa-venus patient-gender female"></i>
+      <mat-card fxFlex="99" class="patient-card"                
+                (click)="navigate(patient)"
+                (panright)="onCardPan($event, patient)"
+                (panend)="onCardRelease($event, patient)"
+                (mouseup)="onCardRelease($event, patient)"
+                [ngStyle]="{'left.px': cardPositions[patient.id]}"
+                >
+        <mat-card-content>
+          <div class="patient-location">
+            <span class="mat-caption">{{patient.service}}</span>
+            <span class="mat-caption">{{patient.room}}</span>
+            <span class="mat-caption">{{patient.bed}}</span>
+          </div>
+          <div class="patient-card-name-row">
+              <i *ngIf="patient.sex==Gender.Male" class="fa fa-mars patient-gender male"></i>
+              <i *ngIf="patient.sex==Gender.Female" class="fa fa-venus patient-gender female"></i>
+              &nbsp;
+            <span class="patient-name">{{patient.name}}</span>
             &nbsp;
-          <span class="patient-name">{{patient.name}}</span>
-          &nbsp;
-          <span class="patient-age">{{patient.age}}j</span>
-        </div>
-        <div class="mat-caption">
-          {{patient.doctorName}}
-        </div>
-      </mat-card-content>
-    </mat-card>
+            <span class="patient-age">{{patient.age}}j</span>
+          </div>
+          <div class="mat-caption">
+            {{patient.doctorName}}
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+    </div>  
   </div>
 </main>
