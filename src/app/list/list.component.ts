@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {Router} from '@angular/router';
 import { HostListener } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { PatientService } from '../patient.service';
 import { Patient, Gender } from '../model/patient';
@@ -25,9 +26,16 @@ export class ListComponent implements OnInit {
   cardPositions: Map<number, number>;
 
   constructor(public dialog: MatDialog,
+              public snackBar: MatSnackBar,
               private  patientService:  PatientService, 
               private router: Router){
                 console.log("constructor");
+  }
+
+  showMessage(message: string, action: string = '') {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
   }
 
   openFilterDialog(): void {
@@ -103,10 +111,16 @@ console.log("which is at position " + this.cardPositions[patient.id])
   }
 
   onCardPan(event, patient){ 
-    this.cardPositions[patient.id] = event.deltaX;
+    console.log(event.deltaX);
+    //move the card, but never off to the left side
+    this.cardPositions[patient.id] = Math.max(0, event.deltaX);
   }
 
   onCardRelease(event, patient){    
+
+    //if the card has been dragged
+    //far enough,  check out the patient,
+    //otherwise reposition the card
 
     let offset: number = Math.abs(this.cardPositions[patient.id]);
     let w = window.innerWidth;
@@ -123,6 +137,7 @@ console.log("which is at position " + this.cardPositions[patient.id])
 
   dischargePatient(patient: Patient){
     this.patients = this.patients.filter(obj => obj.id !== patient.id);
+    this.showMessage('Uitgecheckt: ' + patient.name);
   }
 
 }

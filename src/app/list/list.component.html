@@ -1,8 +1,8 @@
 <mat-toolbar  color="primary">
   <mat-toolbar-row class="justify-children">
-    <i class="fa fa-search clickable" (click)="openFilterDialog()"></i>
+    <span><i class="fa fa-search clickable" (click)="openFilterDialog()"></i></span>
     <span>Patiënten</span>
-    <i class="fa fa-plus clickable"></i>
+    <span><i class="fa fa-plus clickable"></i></span>
   </mat-toolbar-row>
 </mat-toolbar>
 <main>
@@ -14,7 +14,7 @@
         </div>
       <mat-card fxFlex="99" class="patient-card"                
                 (click)="cardClicked(patient)"
-                (panright)="onCardPan($event, patient)"
+                (pan)="onCardPan($event, patient)"
                 (panend)="onCardRelease($event, patient)"
                 data-mc-options='{ "touchAction": "pan-y" }'
                 [ngStyle]="{'left.px': cardPositions[patient.id]}"
